@@ -1,0 +1,31 @@
+{
+  "rules": {
+    "user_data": {
+      ".read": "auth.uid === 'mysql-service'",
+      ".write": "auth.uid === 'mysql-service'",
+      "$uid": {
+        ".read": "$uid === auth.uid",
+        ".write": "$uid === auth.uid && root.child('user_rights').child(auth.uid).child('sql').val() == true"
+      }
+    },
+    "queue": {
+      ".write": "auth != null",
+      ".read": "auth.uid == 'mysql-service'",
+      "$key": {
+        ".validate": "!data.exists() && newData.exists()"
+      }
+    },
+    "user_rights": {
+      ".write": false,
+      ".read": false
+    },
+    "sql_prepared_statement": {
+      ".write": "auth.uid == 'mysql-service'",
+      ".read": "auth.uid != null"
+    },
+    "db_statement": {
+      ".write": "auth.uid == 'mysql-service'",
+      ".read": "auth.uid != null"
+    }
+  }
+}
