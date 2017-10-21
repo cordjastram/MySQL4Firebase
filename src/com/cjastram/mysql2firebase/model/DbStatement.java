@@ -1,4 +1,4 @@
-package com.cjastram.mysql4firebase.model;
+package com.cjastram.mysql2firebase.model;
 
 import java.util.ArrayList;
 import java.util.List;

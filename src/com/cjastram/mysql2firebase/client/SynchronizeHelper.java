@@ -1,4 +1,4 @@
-package com.cjastram.mysql4firebase.client;
+package com.cjastram.mysql2firebase.client;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

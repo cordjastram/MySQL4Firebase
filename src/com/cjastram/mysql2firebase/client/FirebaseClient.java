@@ -1,6 +1,6 @@
-package com.cjastram.mysql4firebase.client;
+package com.cjastram.mysql2firebase.client;
 
-import com.cjastram.mysql4firebase.config.FirebaseConfig;
+import com.cjastram.mysql2firebase.config.FirebaseConfig;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseCredentials;

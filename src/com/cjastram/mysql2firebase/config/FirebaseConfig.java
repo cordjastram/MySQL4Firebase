@@ -1,4 +1,4 @@
-package com.cjastram.mysql4firebase.config;
+package com.cjastram.mysql2firebase.config;
 
 import java.util.HashMap;
 import java.util.Map;

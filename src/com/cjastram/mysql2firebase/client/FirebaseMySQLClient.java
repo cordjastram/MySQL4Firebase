@@ -1,10 +1,10 @@
-package com.cjastram.mysql4firebase.client;
+package com.cjastram.mysql2firebase.client;
 
-import com.cjastram.mysql4firebase.config.FirebaseConfig;
-import com.cjastram.mysql4firebase.model.DbStatement;
-import com.cjastram.mysql4firebase.model.Parameter;
-import com.cjastram.mysql4firebase.model.QueueItem;
-import com.cjastram.mysql4firebase.model.SQLRequest;
+import com.cjastram.mysql2firebase.config.FirebaseConfig;
+import com.cjastram.mysql2firebase.model.DbStatement;
+import com.cjastram.mysql2firebase.model.Parameter;
+import com.cjastram.mysql2firebase.model.QueueItem;
+import com.cjastram.mysql2firebase.model.SQLRequest;
 import com.google.firebase.database.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
