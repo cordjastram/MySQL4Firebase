@@ -7,7 +7,7 @@ MariaDB but you can use any database for which a JDBC driver is available. It al
 
 #### 1. Firebase
 
-  * Go to the [Firebase homepage](https://firebase.google.com/documentation) to get a basic understanding of Google Firebase
+  * Go to the [Firebase homepage](https://firebase.google.com) to get a basic understanding of Google Firebase
   
   * Get a Firebase account   
 
@@ -23,7 +23,7 @@ MariaDB but you can use any database for which a JDBC driver is available. It al
  * Install the [northwind sample database](https://github.com/easonchan1113/northwindextended) in your MySQL or 
    MariaDB database. 
   
- * In the `config` directory edit the `mysql.config.xml` file and update the following entries
+ * In the `config` directory edit the `mysql.config.xml` file and update the following entries:
       
      `<entry key="password">bitnami</entry>`
      
@@ -39,6 +39,13 @@ MariaDB but you can use any database for which a JDBC driver is available. It al
  
  * Now you can use the demo app from  [MySQL4FirebaseApp](https://github.com/cordjastram/MySQL4FirebaseApp) to call 
    SQL statements from your mobile app.
+   
+   
+   
+   #### 3. Add additional SQL statements 
+   
+   * TBD
+
 
 
 
