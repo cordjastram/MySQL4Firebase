@@ -5,10 +5,13 @@ MariaDB but you can use any database for which a JDBC driver is available. It al
 
 ![image]( ./docs/abb_2.png) 
 
-#### Firebase
+#### 1. Firebase
 
+  * Go to the [Firebase homepage](https://firebase.google.com/documentation) to get a basic understanding of Google Firebase
+  
+  * Get a Firebase account   
 
-#### Installation Gude
+#### 2. Installation Gude
 
  * Create a new Firebase project 
  
