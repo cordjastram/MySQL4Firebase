@@ -15,8 +15,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public abstract class FirebaseClient {
 
 
-    private static Logger logger = LoggerFactory.getLogger(FirebaseMySQLClient.class);
-
+    private static final Logger logger = LoggerFactory.getLogger(FirebaseMySQLClient.class);
 
     public FirebaseClient(FirebaseConfig config) {
         checkNotNull(config, "Configuration for FirebaseClient can't be null");
@@ -54,6 +53,9 @@ public abstract class FirebaseClient {
         return result;
     }
 
+    /**
+     * this method is called after <code>setupClient</code>
+     */
     protected void runOnce() {
         // do nothing
     }

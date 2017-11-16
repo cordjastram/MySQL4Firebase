@@ -30,13 +30,11 @@ public class FirebaseMySQLClient extends FirebaseClient {
     }
 
     public FirebaseMySQLClient() {
-        super(new FirebaseConfig("mysql-service"));
+        super(FirebaseConfig.getInstance("mysql-service"));
     }
-
 
     @Override
     void setupClient() {
-
         createDbStatements();
 
         readDbStatements();
@@ -69,7 +67,6 @@ public class FirebaseMySQLClient extends FirebaseClient {
         dbStatement.statement = "{call sp_employees_cursor( ? )}";
         dbStatement.parameterList.add(Parameter.inParameter(1, Types.VARCHAR, "London"));
         dbStatements.add(dbStatement);
-
 
         DatabaseReference dbRefStatements = FirebaseDatabase.getInstance().getReference("db_statement");
 
@@ -106,75 +103,6 @@ public class FirebaseMySQLClient extends FirebaseClient {
     }
 
 }
-
-class QueueValueEventListener implements ValueEventListener {
-    private static Logger logger = LoggerFactory.getLogger(QueueListener.class);
-
-    @Override
-    public void onDataChange(DataSnapshot snapshot) {
-
-        Iterable<DataSnapshot> iterable = snapshot.getChildren();
-
-        logger.info("OnChildAdded: " + snapshot.getChildrenCount() + " Childs");
-
-        for (DataSnapshot ds : iterable) {
-
-            QueueItem queueItem = ds.getValue(QueueItem.class);
-
-            logger.info("OnChildAdded: " + queueItem.toString());
-
-            DatabaseReference dbQueueItem = FirebaseDatabase.getInstance().getReference(queueItem.dbRef);
-
-            if (!queueItem.isProcessed) {
-
-                final DatabaseReference dbReference = FirebaseDatabase.getInstance().getReference(queueItem.dbPathToProcess);
-
-                dbReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot snapshot) {
-                        SQLRequest request = snapshot.getValue(SQLRequest.class);
-
-                        logger.info("Process request: " + request.toString());
-
-                        try {
-                            logger.info("Connect");
-                            request.message = "Try to connect ...";
-                            dbReference.setValue(request);
-                            Connection con = MySqlProcessor.connect();
-                            MySqlProcessor.executeStatement(FirebaseMySQLClient.dbStatements, request, con, snapshot.getRef());
-                            snapshot.getRef().setValue(request);
-                            logger.info("Result: " + request.toString());
-                            if (!request.executionFailed) {
-                                request.message = "Success!";
-                            }
-                        } catch (Throwable e) {
-                            request.message = e.getMessage();
-                            request.executionFailed = true;
-                            logger.error(e.getMessage(), e);
-                        } finally {
-                            dbReference.setValue(request);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError error) {
-                        logger.info("onCancelled" + error.getMessage());
-                    }
-                });
-            }
-
-            //dbQueueItem.removeValue();
-            logger.info(queueItem.toString());
-        }
-    }
-
-
-    @Override
-    public void onCancelled(DatabaseError error) {
-        logger.error(error.getMessage());
-    }
-}
-
 
 class QueueListener implements ChildEventListener {
     private static Logger logger = LoggerFactory.getLogger(QueueListener.class);

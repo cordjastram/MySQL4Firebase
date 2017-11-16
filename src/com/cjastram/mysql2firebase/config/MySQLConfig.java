@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class MySQLConfig {
+
     private static final String SERVER_NAME = "serverName";
     private static final String DATABASE = "database";
     private static final String USER_NAME = "username";

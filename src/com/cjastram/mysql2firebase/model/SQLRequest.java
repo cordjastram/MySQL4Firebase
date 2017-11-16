@@ -13,7 +13,7 @@ public class SQLRequest {
 
     public List<String> result = new ArrayList<>();
 
-    public List<Parameter> parameter = new ArrayList<>();
+    public List<Parameter> parameterList = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -22,7 +22,7 @@ public class SQLRequest {
                 ", message='" + message + '\'' +
                 ", executionFailed=" + executionFailed +
                 ", result=" + result +
-                ", parameter=" + parameter +
+                ", parameterList=" + parameterList +
                 '}';
     }
 }

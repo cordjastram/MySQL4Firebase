@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE properties SYSTEM
+        "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>Firebase Database Config, update the entries below and rename it to firebase.config.xml</comment>
+    <entry key="admin_sdk_json_file">./config/xxxxx.json</entry>
+    <entry key="firebase_db_path">https://xxxxxxx.firebaseio.com</entry>
+</properties>

@@ -18,7 +18,7 @@ class FirebaseTestClient extends FirebaseClient {
     private static String UID_TEST = "gFkm2CB0UjSh2J3qYzFtw95bQHa2";
 
     FirebaseTestClient() {
-        super(new FirebaseConfig(UID_TEST));
+        super(FirebaseConfig.getInstance(UID_TEST));
     }
 
     public static void main(String[] args) {
@@ -42,15 +42,13 @@ class FirebaseTestClient extends FirebaseClient {
 
         SQLRequest rq = new SQLRequest();
         rq.dbStatementName = "select_customers";
-        rq.parameter.add(Parameter.inParameter(1, Types.VARCHAR, "London"));
-        rq.parameter.add(Parameter.inParameter(1, Types.VARCHAR, "3"));
+        rq.parameterList.add(Parameter.inParameter(1, Types.VARCHAR, "London"));
+        rq.parameterList.add(Parameter.inParameter(1, Types.VARCHAR, "3"));
 
         dbRefToProcess.setValue(rq);
 
-
         DatabaseReference dbRefQueueItem = FirebaseDatabase.getInstance().getReference("queue").push();
 
-        qi.dbRef = dbRefQueueItem.getPath().toString();
         qi.dbPathToProcess = dbRefToProcess.getPath().toString();
         qi.isProcessed = false;
 
@@ -61,12 +59,11 @@ class FirebaseTestClient extends FirebaseClient {
         dbRefToProcess = FirebaseDatabase.getInstance().getReference("user_data/" + UID_TEST + "/db_request").push();
         rq = new SQLRequest();
         rq.dbStatementName = "plaing_sql";
-        rq.parameter.add(Parameter.inParameter(1, Types.VARCHAR, "select * from customers"));
+        rq.parameterList.add(Parameter.inParameter(1, Types.VARCHAR, "select * from customers"));
 
         dbRefToProcess.setValue(rq);
         dbRefQueueItem = FirebaseDatabase.getInstance().getReference("queue").push();
 
-        qi.dbRef = dbRefQueueItem.getPath().toString();
         qi.dbPathToProcess = dbRefToProcess.getPath().toString();
         qi.isProcessed = false;
 

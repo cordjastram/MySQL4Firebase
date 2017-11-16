@@ -1,6 +1,7 @@
 package com.cjastram.mysql2firebase.client;
 
 
+import com.cjastram.mysql2firebase.config.MySQLConfig;
 import com.cjastram.mysql2firebase.model.DbStatement;
 import com.cjastram.mysql2firebase.model.Parameter;
 import com.cjastram.mysql2firebase.model.SQLRequest;
@@ -8,13 +9,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonPrimitive;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 /**
  * Created by cjastram on 18.07.2017.
@@ -71,7 +70,7 @@ public class MySqlProcessor {
     static public void handlePlainSQL(SQLRequest request, Connection connection) throws SQLException {
 
         try (Statement stmt = connection.createStatement()) {
-            stmt.execute(request.parameter.get(0).value);
+            stmt.execute(request.parameterList.get(0).value);
             mapResultSet(stmt.getResultSet(), request);
         } catch (SQLException e) {
             // Just a syntax, error everything is ok
@@ -82,7 +81,7 @@ public class MySqlProcessor {
 
     static private void mapInParameter(SQLRequest template, PreparedStatement stmt) throws SQLException {
 
-        for (Parameter param : template.parameter) {
+        for (Parameter param : template.parameterList) {
             if (param.isIn) {
                 switch (param.type) {
                     case Types.CHAR:
@@ -95,7 +94,7 @@ public class MySqlProcessor {
                         stmt.setInt(pos, value);
                         break;
                     default:
-                        throw new SQLException("Invalid parameter type");
+                        throw new SQLException("Invalid parameterList type");
                 }
             }
         }
@@ -104,7 +103,7 @@ public class MySqlProcessor {
 
     static private void registerOutParameter(SQLRequest template, CallableStatement stmt) throws SQLException {
 
-        for (Parameter param : template.parameter) {
+        for (Parameter param : template.parameterList) {
             if (param.isOut) {
                 stmt.registerOutParameter(param.position, param.type);
             }
@@ -113,7 +112,7 @@ public class MySqlProcessor {
     }
 
     static private void mapOutParameter(CallableStatement stmt, SQLRequest template) throws SQLException {
-        for (Parameter param : template.parameter) {
+        for (Parameter param : template.parameterList) {
             if (param.isOut) {
                 int pos = param.position;
                 String value = stmt.getString(pos);
@@ -164,62 +163,3 @@ public class MySqlProcessor {
 
 }
 
-class MySQLConfig {
-    private static final String SERVER_NAME = "serverName";
-    private static final String DATABASE = "database";
-    private static final String USER_NAME = "username";
-    private static final String PASSWORD = "password";
-    private static final String CONFIG_FILE = "./config/mysql.config.xml";
-
-    private static MySQLConfig config = new MySQLConfig();
-
-    private Properties properties;
-
-    static MySQLConfig getInstance() {
-        return MySQLConfig.config;
-    }
-
-    private MySQLConfig() {
-        properties = new Properties();
-        try (FileInputStream fis = new FileInputStream(CONFIG_FILE)) {
-            properties.loadFromXML(fis);
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }
-
-    /**
-     * @return the server name from the XML config file
-     */
-    private String getServerName() {
-        return properties.getProperty(SERVER_NAME);
-    }
-
-    /**
-     * @return the database name from the XML config file
-     */
-    private String getDatabase() {
-        return properties.getProperty(DATABASE);
-    }
-
-    /**
-     * @return the user name from the XML config file
-     */
-    String getUsername() {
-        return properties.getProperty(USER_NAME);
-    }
-
-    /**
-     * @return the password from the XML config file
-     */
-    String getPassword() {
-        return properties.getProperty(PASSWORD);
-    }
-
-    /**
-     * @return the URL for the database
-     */
-    String getURL() {
-        return String.format("jdbc:mysql://%s/%s?generateSimpleParameterMetadata=true", config.getServerName(), config.getDatabase());
-    }
-}
