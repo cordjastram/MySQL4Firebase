@@ -2,7 +2,7 @@
 MySQL4Firebase is a server side Java program which connects a MySQL database to a Firebase app.
 
 
-![image]( ./docs/abb_2.png =250x250) 
+![image]( ./docs/abb_2.png) 
 
 It allows you to call SQL statements from a mobile device. 
 
