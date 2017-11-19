@@ -20,7 +20,7 @@ MariaDB but you can use any database for which a JDBC driver is available. It al
  * update the file `config/firebase.config.template.xml` file. Change the location of your service account
    JSON file and change the database URL. Then rename the file to `firebase.config.xml`.
    
- * Install the [northwind sample database](https://github.com/easonchan1113/northwindextended) in your MySQL or 
+ * Install the [northwind sample database](https://github.com/dalers/mywind) in your MySQL or 
    MariaDB database. 
   
  * In the `config` directory edit the `mysql.config.xml` file and update the following entries:
@@ -40,11 +40,11 @@ MariaDB but you can use any database for which a JDBC driver is available. It al
  * Now you can use the demo app from  [MySQL4FirebaseApp](https://github.com/cordjastram/MySQL4FirebaseApp) to call 
    SQL statements from your mobile app.
    
+   ![image]( ./docs/abb_3.png) 
    
    
-   #### 3. Add additional SQL statements 
    
-   * TBD
+
 
 
 
