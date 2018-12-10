@@ -44,4 +44,4 @@ MariaDB but you can use any database for which a JDBC driver is available. It al
    
    Now press the SUBMIT button and you get
       
-   ![image]( ./docs/abb_4_b.png =640x360) 
+   ![image]( ./docs/abb_4_b.png ){: height="640px" width="360px"} 
