@@ -23,7 +23,7 @@ MariaDB but you can use any database for which a JDBC driver is available. It al
  * Install the [northwind sample database](https://github.com/dalers/mywind) in your MySQL or 
    MariaDB database. 
   
- * In the `config` directory edit the `mysql.config.xml` file and update the following entries:
+ * In the `config` directory edit the `mysql.config.xml` file and update the following entries to your correct values:
       
      `<entry key="password">bitnami</entry>`
      
