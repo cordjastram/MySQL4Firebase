@@ -40,8 +40,8 @@ MariaDB but you can use any database for which a JDBC driver is available. It al
  * Now you can use the demo app from  [MySQL4FirebaseApp](https://github.com/cordjastram/MySQL4FirebaseApp) to call 
    SQL statements from your mobile app.
    
-   ![image]( ./docs/abb_3.png )  
+   ![image]( ./docs/abb_4_a.png )  
    
    Now press the SUBMIT button and you get
       
-   ![image]( ./docs/abb_4_a.png ) 
+   ![image]( ./docs/abb_4_b.png ) 
